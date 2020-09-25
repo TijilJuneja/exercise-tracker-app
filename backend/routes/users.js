@@ -9,7 +9,11 @@ router.route('/').get((req,res) => {
 
 router.route('/add').post((req,res) => {
     const username = req.body.username;
-    
+    const user = User.findOne({username:username});
+    if(user){
+        console.log("user Already exists");
+        return;
+    }
     const newUser = new User({username});
 
     newUser.save()
